@@ -11,7 +11,6 @@ import { PaymentAttemptDto } from './dto/payment-attempt.dto';
 @Injectable()
 export class PaymentsService {
   private readonly apiUrl: string;
-  private readonly apiKey: string;
   private readonly secretKey: string;
 
   constructor(
@@ -21,13 +20,12 @@ export class PaymentsService {
     @InjectModel(Transaction.name) private transactionModel: Model<TransactionDocument>,
   ) {
     this.apiUrl = this.configService.get<string>('BOLD_API_URL') ?? '';
-    this.apiKey = this.configService.get<string>('BOLD_API_KEY') ?? '';
     this.secretKey = this.configService.get<string>('BOLD_SECRET_KEY') ?? '';
   }
 
   private get headers() {
     return {
-      Authorization: `x-api-key ${this.secretKey}`,
+      'x-api-key': this.secretKey,
       'Content-Type': 'application/json',
     };
   }
