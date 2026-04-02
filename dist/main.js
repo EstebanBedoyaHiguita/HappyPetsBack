@@ -20,7 +20,8 @@ async function bootstrap() {
             }
             if (process.env.NODE_ENV === 'production') {
                 if (origin.includes('.onrender.com') ||
-                    origin.includes('.render.com')) {
+                    origin.includes('.render.com') ||
+                    origin.includes('.vercel.app')) {
                     return callback(null, true);
                 }
             }
