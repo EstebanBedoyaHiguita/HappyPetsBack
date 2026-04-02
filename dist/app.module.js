@@ -21,6 +21,7 @@ const shipping_module_1 = require("./shipping/shipping.module");
 const orders_module_1 = require("./orders/orders.module");
 const cities_module_1 = require("./cities/cities.module");
 const upload_module_1 = require("./upload/upload.module");
+const payments_module_1 = require("./payments/payments.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -47,6 +48,7 @@ exports.AppModule = AppModule = __decorate([
             orders_module_1.OrdersModule,
             cities_module_1.CitiesModule,
             upload_module_1.UploadModule,
+            payments_module_1.PaymentsModule,
         ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],
