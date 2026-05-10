@@ -10,7 +10,6 @@ export class PaymentsController {
   constructor(private readonly paymentsService: PaymentsService) {}
 
   @Get('checkout/:orderId')
-  @UseGuards(JwtAuthGuard)
   getCheckoutParams(@Param('orderId') orderId: string) {
     return this.paymentsService.getCheckoutParams(orderId);
   }
