@@ -4,31 +4,15 @@ import { RolesGuard } from '../common/guards/roles.guard';
 import { Roles } from '../common/decorators/roles.decorator';
 import { UserRole } from '../users/schemas/user.schema';
 import { PaymentsService } from './payments.service';
-import { CreatePaymentIntentDto } from './dto/create-payment-intent.dto';
-import { PaymentAttemptDto } from './dto/payment-attempt.dto';
 
 @Controller('payments')
 export class PaymentsController {
   constructor(private readonly paymentsService: PaymentsService) {}
 
-  @Post('intent')
-  createIntent(@Body() dto: CreatePaymentIntentDto) {
-    return this.paymentsService.createPaymentIntent(dto.orderId);
-  }
-
-  @Post('attempt')
-  createAttempt(@Body() dto: PaymentAttemptDto) {
-    return this.paymentsService.createPaymentAttempt(dto);
-  }
-
-  @Get('attempt/:transactionId/status')
-  getStatus(@Param('transactionId') transactionId: string) {
-    return this.paymentsService.getAttemptStatus(transactionId);
-  }
-
-  @Get('pse-banks')
-  getPseBanks() {
-    return this.paymentsService.getPseBanks();
+  @Get('checkout/:orderId')
+  @UseGuards(JwtAuthGuard)
+  getCheckoutParams(@Param('orderId') orderId: string) {
+    return this.paymentsService.getCheckoutParams(orderId);
   }
 
   @Get('transactions')
